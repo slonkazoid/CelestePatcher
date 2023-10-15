@@ -55,6 +55,12 @@ Celeste's an indie game and it's worth the $20. It even goes on 75% sale on Stea
 
 I am not responsible for any misuse of this code.
 
+# Credits
+
+- [Julian](https://github.com/NotNite), for general tips on modifying .NET executables
+- [Ari](https://github.com/adryd325), for providing a reference Celeste.exe (i do not own the game on itch) (that is the
+  entire reason i made this project)
+
 # License
 
 This project is licensed under the GNU General Public License v3.0. See the [LICENSE](LICENSE) file for more
