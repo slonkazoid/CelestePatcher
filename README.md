@@ -37,6 +37,8 @@ After building, run the `CelestePatcher/bin/Release/net7.0/CelestePatcher` file 
 ```sh
 cd ~/.local/share/Steam/steamapps/common/Celeste # Game installation directory
 ~/CelestePatcher/CelestePatcher/bin/Release/net7.0/CelestePatcher # Path to executable
+mv Celeste.exe{,.bak} # Rename original Celeste.exe to Celeste.exe.bak
+mv Celeste.exe{.patched,} # Rename the patched executable to Celeste.exe
 rm lib{,64}/lib{Csteamworks,steam_api}.so Steamworks.NET.dll # Remove unnecessary files
 ```
 
