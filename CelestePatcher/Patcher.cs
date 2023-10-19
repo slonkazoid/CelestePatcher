@@ -99,12 +99,10 @@ public class Patcher
             var processor = method.Body.GetILProcessor();
             var instructions = method.Body.Instructions;
 
-            var index = instructions.IndexOf(instructions.First(i =>
-                i.OpCode == OpCodes.Call && i.Operand is MethodReference methodRef &&
-                methodRef.DeclaringType.FullName == "Steamworks.SteamUserStats" &&
-                methodRef.Name == "GetStat")) - 2;
+            int count = instructions.Count;
+            for (int i = 0; i < count; i++) processor.RemoveAt(0);
 
-            for (int i = 0; i < 10; i++) processor.RemoveAt(index);
+            processor.Append(Instruction.Create(OpCodes.Ret));
         }
 
         _log.Verbose("Patching method Stats::Local");
@@ -113,10 +111,11 @@ public class Patcher
             var processor = method.Body.GetILProcessor();
             var instructions = method.Body.Instructions;
 
-            processor.Remove(instructions.First(
-                i => i.OpCode == OpCodes.Call && i.Operand is MethodReference methodRef &&
-                     methodRef.DeclaringType.FullName == "Steamworks.SteamUserStats" &&
-                     methodRef.Name == "GetStat"));
+            int count = instructions.Count;
+            for (int i = 0; i < count; i++) processor.RemoveAt(0);
+
+            processor.Append(Instruction.Create(OpCodes.Ldc_I4_0));
+            processor.Append(Instruction.Create(OpCodes.Ret));
         }
 
         _log.Verbose("Patching method Stats::Global");
@@ -125,10 +124,11 @@ public class Patcher
             var processor = method.Body.GetILProcessor();
             var instructions = method.Body.Instructions;
 
-            processor.Remove(instructions.FirstOrDefault(
-                i => i.OpCode == OpCodes.Call && i.Operand is MethodReference methodRef &&
-                     methodRef.DeclaringType.FullName == "Steamworks.SteamUserStats" &&
-                     methodRef.Name == "GetGlobalStat"));
+            int count = instructions.Count;
+            for (int i = 0; i < count; i++) processor.RemoveAt(0);
+
+            processor.Append(Instruction.Create(OpCodes.Ldc_I4_0));
+            processor.Append(Instruction.Create(OpCodes.Ret));
         }
 
         _log.Verbose("Patching method Stats::Store");
@@ -137,10 +137,10 @@ public class Patcher
             var processor = method.Body.GetILProcessor();
             var instructions = method.Body.Instructions;
 
-            processor.Remove(instructions.FirstOrDefault(
-                i => i.OpCode == OpCodes.Call && i.Operand is MethodReference methodRef &&
-                     methodRef.DeclaringType.FullName == "Steamworks.SteamUserStats" &&
-                     methodRef.Name == "StoreStats"));
+            int count = instructions.Count;
+            for (int i = 0; i < count; i++) processor.RemoveAt(0);
+
+            processor.Append(Instruction.Create(OpCodes.Ret));
         }
     }
 
